@@ -34,16 +34,18 @@ export const signup = async (req, res) => {
     const { fullname, username, password, confirmPassword, gender } = req.body;
 
     if (password != confirmPassword) {
-      res.status(401).json({ error: "password does not match" });
+      return res.status(401).json({ error: "password does not match" });
     }
 
     const user = await User.findOne({ username });
-
+    
     if (user) {
-      res.status(401).json({ error: "user already exist" });
+   
+      return res.status(401).json({ error: "user already exist" });
     }
 
     // hash password here
+
 
     const hashPassword = await bcrypt.hash(password, 10);
 
@@ -73,7 +75,7 @@ export const signup = async (req, res) => {
     }
   } catch (error) {
     console.log("error in auth controller signup" + error);
-    res.status(401).json({ Errot: "internal server error" });
+    res.status(401).json({ Error: "internal server error" });
   }
 };
 
