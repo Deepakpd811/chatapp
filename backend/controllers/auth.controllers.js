@@ -25,7 +25,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in auth controller login " + error);
-    res.status(401).json({ Errot: "internal server error" });
+    res.status(401).json({ Error: "internal server error" });
   }
 };
 

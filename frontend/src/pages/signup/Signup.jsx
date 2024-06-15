@@ -88,7 +88,9 @@ const Signup = () => {
         <Gendercheck onCheckboxchange = {handleCheckBox} selectedGender={inputs.gender}/>
         <Link to="/login" className="text-sm hover:underline hover:text-blue-500 mt-2 inline-block ">Already have a account</Link>
         <div>
-          <button  className="btn btn-block btn-sm mt-2">Signup</button>
+          <button  className="btn btn-block btn-sm mt-2">
+            {loading? <span className='loading loading-spinner'></span>:"Signup"}
+            </button>
         </div>
       </form>
     </div>
