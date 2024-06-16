@@ -5,7 +5,7 @@ export const getUserSidebar = async (req,res)=>{
         const  loguser = req.user._id;
 
         const AllUsers = await User.find({_id:{$ne:loguser}}).select("-password"); //all user expect yourself
-        console.log(AllUsers);
+        // console.log(AllUsers);
 
         res.status(200).json(AllUsers)
 

@@ -11,7 +11,7 @@ const useSignup = () => {
     const signup = async ({ fullname, username, password, confirmPassword, gender }) => {
         const success = handleInputs({ fullname, username, password, confirmPassword, gender });
 
-        console.log(success);
+        // console.log(success);
     
         if (!success) return;
     

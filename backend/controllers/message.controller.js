@@ -5,19 +5,21 @@ export const getMessage = async (req, res) => {
   try {
     const { id: userToChat } = req.params;
     const senderId = req.user._id;
+
     console.log(senderId + " " + userToChat);
 
     const conversation = await Conversation.findOne({
       participant: { $all: [senderId, userToChat] },
     }).populate("messages");
+   console.log(conversation)
 
     if (!conversation) {
-      res.status(200).json([]);
+      return res.status(200).json([]);
     }
 
     // console.log(conversation.messages)
 
-    res.status(201).json(conversation.messages);
+    return res.status(201).json(conversation.messages);
 
   } catch (error) {
     console.log("error in getMessage " + error);
