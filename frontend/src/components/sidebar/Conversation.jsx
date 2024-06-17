@@ -8,6 +8,7 @@ const Conversation = ({ conversation, lastidx }) => {
 
   const {onlineUser}=useSocketContext();
   const isonline = onlineUser.includes(conversation._id)
+  console.log(isonline)
   
   
   return (
