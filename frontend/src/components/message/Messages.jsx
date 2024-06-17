@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import Message from './Message'
 import useGetMessage from '../../hooks/useGetMessage'
+import useListenMessage from '../../hooks/useListenMessage'
 
 const Messages = () => {
   const {loading,messages}=useGetMessage()
-  
+  useListenMessage()
   
   const lastmsgref = useRef();
 

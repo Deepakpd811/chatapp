@@ -1,17 +1,18 @@
 import Conversation from "../model/conversation.js";
 import Message from "../model/message.model.js";
+import { getReceiverId, io } from "../socket/socket.js";
 
 export const getMessage = async (req, res) => {
   try {
     const { id: userToChat } = req.params;
     const senderId = req.user._id;
 
-    console.log(senderId + " " + userToChat);
+    // console.log(senderId + " " + userToChat);
 
     const conversation = await Conversation.findOne({
       participant: { $all: [senderId, userToChat] },
     }).populate("messages");
-   console.log(conversation)
+  //  console.log(conversation)
 
     if (!conversation) {
       return res.status(200).json([]);
@@ -36,7 +37,7 @@ export const sendMessage = async (req, res) => {
     // console.log(receiverId)
     // console.log(senderId)
 
-    console.log(message);
+    // console.log(message);
 
     let conversation = await Conversation.findOne({
       participant: { $all: [senderId, receiverId] },
@@ -59,6 +60,14 @@ export const sendMessage = async (req, res) => {
 
     await conversation.save();
     await newMessage.save();
+
+    // socket
+
+    const receiverSocketId = getReceiverId(receiverId)
+
+    if(receiverSocketId){
+      io.to(receiverSocketId).emit("newMessage",newMessage)
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {

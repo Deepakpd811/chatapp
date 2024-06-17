@@ -3,17 +3,14 @@ import { useAuthContext } from '../../context/AuthContext'
 import useConversation from '../../zustand/useConversation'
 
 const Message = ({message}) => {
-  console.log(message)
+
   const {authuser}=useAuthContext()
-  // console.log(authuser)
-  // console.log(authuser)
-  // console.log(authuser._id)
+ 
 
   const {selectedConversation}=useConversation();
-  // console.log(selectedConversation.fullname)
+ 
   const fromMe = message.senderId === authuser._id;
-  // console.log(message.senderId)
-  // console.log(fromMe)
+
   const chatClassName = fromMe ? 'chat-end': 'chat-start';
   const profilePic = fromMe ? authuser.profilepic : selectedConversation.profilepic;
   const bgcolor = fromMe ? 'bg-blue-500': "";

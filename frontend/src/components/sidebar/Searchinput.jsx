@@ -6,7 +6,7 @@ import useGetConversations from '../../hooks/useGetConversations';
 const Searchinput = () => {
   const [search,setSearch] = useState("");
   const {setSelectedConversation}=useConversation();
-  const {conversation,setConversation} = useGetConversations();
+  const {conversation} = useGetConversations();
 
   
   const handlesubmit = (e)=>{
